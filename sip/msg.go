@@ -173,15 +173,15 @@ func (msg *Msg) Append(b *bytes.Buffer) {
 		b.WriteString("\r\n")
 	}
 
-	if msg.Route != nil {
+	for rt := msg.Route; rt != nil; rt = rt.Next {
 		b.WriteString("Route: ")
-		msg.Route.Append(b)
+		rt.Append(b)
 		b.WriteString("\r\n")
 	}
 
-	if msg.RecordRoute != nil {
+	for rr := msg.RecordRoute; rr != nil; rr = rr.Next {
 		b.WriteString("Record-Route: ")
-		msg.RecordRoute.Append(b)
+		rr.Append(b)
 		b.WriteString("\r\n")
 	}
 
