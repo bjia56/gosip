@@ -23,10 +23,9 @@ import (
 
 // XHeader is a linked list storing an unrecognized SIP headers.
 type XHeader struct {
-	Name    string // tokenc
-	Value   []byte // UTF8, never nil
-	NoSpace bool
-	Next    *XHeader
+	Name  string // tokenc
+	Value []byte // UTF8, never nil
+	Next  *XHeader
 }
 
 // Get returns an entry in O(n) time.
@@ -54,11 +53,7 @@ func (h *XHeader) Append(b *bytes.Buffer) {
 	}
 	h.Next.Append(b)
 	appendSanitized(b, []byte(h.Name), tokenc)
-	if h.NoSpace {
-		b.WriteString(":")
-	} else {
-		b.WriteString(": ")
-	}
+	b.WriteString(":")
 	b.Write(h.Value)
 	b.WriteString("\r\n")
 }
