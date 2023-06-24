@@ -1,3 +1,3 @@
-module github.com/bjia56/gosip
+module github.com/jart/gosip
 
 go 1.14
